@@ -16,6 +16,7 @@ return function(buffer)
     local handlers = {
       ['Run main'] = helpers.shell_handler('cargo run'),
       ['Test'] = helpers.shell_handler('cargo test'),
+      ['Custom'] = helpers.shell_handler('cargo ', true),
     }
 
     for _, bin in pairs(bins) do
