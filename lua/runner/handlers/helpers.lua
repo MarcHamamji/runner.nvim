@@ -20,36 +20,13 @@ M.shell_handler = function(command, editable)
     end
 
     local current_buffer_name = vim.api.nvim_buf_get_name(code_buffer)
-
     local output_buffer = utils.create_buffer('OUTPUT - ' .. current_buffer_name)
-    vim.api.nvim_create_autocmd('BufHidden', {
-      buffer = output_buffer,
-      callback = function()
-        vim.schedule(function()
-          vim.api.nvim_buf_delete(output_buffer, {})
-          vim.fn.jobstop(M._job_id)
-          M._job_id = nil
-          print('Terminated running process')
-        end)
-      end
-    })
 
     local output_window = utils.create_window()
-
     vim.api.nvim_win_set_buf(output_window, output_buffer)
 
-    local add_line = utils.create_add_line(output_buffer)
-
-    if M._job_id then
-      vim.fn.jobstop(M._job_id)
-      M._job_id = nil
-    end
-
-    M._job_id = vim.fn.jobstart(command, {
-      pty = true,
-      cwd = vim.fn.getcwd(),
-      on_stdout = add_line,
-      on_stderr = add_line
+    vim.fn.termopen(command, {
+      cwd = vim.fn.getcwd()
     })
   end
 end

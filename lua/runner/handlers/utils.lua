@@ -1,5 +1,3 @@
-local baleia = require('baleia').setup {}
-
 local M = {}
 
 M._buffer = nil
@@ -45,21 +43,6 @@ M.create_window = function()
 
   M._window = window
   return window
-end
-
-M.create_add_line = function(buffer)
-  return function(_, data)
-    vim.api.nvim_buf_set_option(buffer, 'modifiable', true)
-    local row = vim.api.nvim_buf_line_count(buffer) - 1
-    local col = vim.fn.len(vim.api.nvim_buf_get_lines(buffer, -2, -1, false)[1])
-    baleia.buf_set_text(buffer, row, col, row, col, vim.tbl_map(
-      function(d)
-        return vim.fn.trim(d, ('\x0D'))
-      end,
-      data
-    ))
-    vim.api.nvim_buf_set_option(buffer, 'modifiable', false)
-  end
 end
 
 M.run_command = function(command, callback)
