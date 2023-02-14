@@ -3,16 +3,12 @@ local M = {}
 M._buffer = nil
 M._window = nil
 
-M.create_buffer = function(name)
-  if M._buffer and vim.api.nvim_buf_is_valid(M._buffer) then
-    vim.api.nvim_buf_set_option(M._buffer, 'modifiable', true)
-    vim.api.nvim_buf_set_lines(M._buffer, 0, -1, false, {})
-    vim.api.nvim_buf_set_option(M._buffer, 'modifiable', false)
-    return M._buffer
+M.create_buffer = function()
+  if M._buffer then
+    vim.api.nvim_buf_delete(M._buffer, {})
   end
 
   local buffer = vim.api.nvim_create_buf(true, true)
-  vim.api.nvim_buf_set_name(buffer, name)
   vim.api.nvim_buf_set_option(buffer, 'modifiable', false)
 
   M._buffer = buffer
@@ -20,9 +16,11 @@ M.create_buffer = function(name)
 end
 
 M.create_window = function()
-  if M._window and vim.api.nvim_win_is_valid(M._window) and vim.api.nvim_win_get_buf(M._window) == M._buffer then
+  if M._window and vim.api.nvim_win_is_valid(M._window) then
+    vim.api.nvim_set_current_win(M._window)
     return M._window
   end
+
   vim.cmd [[ vsplit ]]
   local window = vim.api.nvim_get_current_win()
 

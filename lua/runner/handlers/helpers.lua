@@ -14,13 +14,12 @@ M.shell_handler = function(command, editable)
   if editable == nil then
     editable = false
   end
-  return function(code_buffer)
+  return function(_)
     if editable then
       command = vim.fn.input('Command: ', command)
     end
 
-    local current_buffer_name = vim.api.nvim_buf_get_name(code_buffer)
-    local output_buffer = utils.create_buffer('OUTPUT - ' .. current_buffer_name)
+    local output_buffer = utils.create_buffer()
 
     local output_window = utils.create_window()
     vim.api.nvim_win_set_buf(output_window, output_buffer)
