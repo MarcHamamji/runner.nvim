@@ -48,6 +48,9 @@ A Neovim plugin to run code inside the editor
 
   ```lua
   require('runner').run()
+
+  -- To set a mapping
+  vim.keymap.set('n', '<leader><space>', require('runner').run)
   ```
 
 ## Configuration
