@@ -3,6 +3,7 @@ local finders = require('telescope.finders')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local sorters = require('telescope.sorters')
+local themes = require('telescope.themes')
 
 local utils = require('runner.handlers.utils')
 
@@ -45,7 +46,7 @@ M.choice = function(handlers)
   end
 
   return function(buffer)
-    local picker = pickers.new({}, {
+    local picker = pickers.new({}, themes.get_dropdown({
       prompt_title = "Runner",
       finder = finders.new_table {
         results = vim.tbl_keys(handlers)
@@ -59,7 +60,7 @@ M.choice = function(handlers)
         end)
         return true
       end,
-    })
+    }))
     picker:find()
   end
 end
