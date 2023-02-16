@@ -8,8 +8,6 @@ local utils = require('runner.handlers.utils')
 
 local M = {}
 
-M._job_id = nil
-
 M.shell_handler = function(command, editable)
   if editable == nil then
     editable = false
