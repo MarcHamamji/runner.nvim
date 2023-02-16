@@ -13,7 +13,9 @@ return function(buffer)
       end
     end
 
-    local handlers = {}
+    local handlers = {
+      ['Run current file'] = helpers.shell_handler('node ' .. vim.fn.expand('%'))
+    }
 
     for _, bin in pairs(bins) do
       handlers['Run "' .. bin .. '"'] = helpers.shell_handler('npm run ' .. bin)
