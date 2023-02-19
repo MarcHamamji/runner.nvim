@@ -14,7 +14,6 @@ return function(buffer)
     end
 
     local handlers = {
-      ['Run main'] = helpers.shell_handler('cargo run'),
       ['Test'] = helpers.shell_handler('cargo test'),
       ['Custom'] = helpers.shell_handler('cargo ', true),
     }
