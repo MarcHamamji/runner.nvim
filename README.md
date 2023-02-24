@@ -137,10 +137,10 @@ A Neovim plugin to run code inside the editor
 ## Advanced handlers configurations
   
   For creating dynamic handlers like one for each `npm` or `cargo` script, you can write your own handler function that generates the other handlers, gives them to the choice handler, and runs it itself.
-  See [Node.js example](./lua/runner/handlers/languages/nodejs/init.lua).
+  See [Node.js example](lua/runner/handlers/languages/nodejs/init.lua).
 
 ## Contribution
 
-  If you find that some handlers for a specific language are missing, feel free to open a pull request by adding them in the [./lua/runner/handlers/init.lua]() file.
+  If you find that some handlers for a specific language are missing, feel free to open a pull request by adding them in the [lua/runner/handlers/init.lua]() file.
   
   Licensed under the [MIT license](./LICENSE).
