@@ -141,6 +141,6 @@ A Neovim plugin to run code inside the editor
 
 ## Contribution
 
-  If you find that some handlers for a specific language are missing, feel free to open a pull request by adding them in the [](lua/runner/handlers/init.lua) file.
+  If you find that some handlers for a specific language are missing, feel free to open a pull request by adding them in the [lua/runner/handlers/init.lua](lua/runner/handlers/init.lua) file.
   
   Licensed under the [MIT license](./LICENSE).
