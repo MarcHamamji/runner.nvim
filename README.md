@@ -65,6 +65,8 @@ A Neovim plugin to run code inside the editor
   | `filetype` | The filetype on which to run the given handler | `string` |
   | `handler` | The handler to run when the current file matches the filetype | `function(code_buffer_number)`  |
 
+  Example:
+
   ```lua
   require('runner').set_handler('lua', function(code_buffer_number)
     vim.print('Running lua file in buffer ' .. code_buffer_number)
