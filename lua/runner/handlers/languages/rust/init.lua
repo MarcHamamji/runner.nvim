@@ -31,9 +31,9 @@ return function(buffer)
       end
 
       local handlers = {
-        ['Test'] = helpers.shell_handler('cargo test'),
-        ['Custom'] = helpers.shell_handler('cargo ', true),
         unpack(run_handlers),
+        ['Custom'] = helpers.shell_handler('cargo ', true),
+        ['Test all'] = helpers.shell_handler('cargo test'),
       }
 
       for _, bin in pairs(bins) do
