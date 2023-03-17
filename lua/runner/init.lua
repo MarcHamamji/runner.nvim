@@ -1,4 +1,5 @@
 local handlers = require('runner.handlers')
+local list_ui = require('nvim-list-ui')
 
 local M = {}
 
@@ -6,6 +7,36 @@ M._handlers = handlers
 
 M.set_handler = function(filetype, handler)
   M._handlers[filetype] = handler
+end
+
+M.list_commands = function()
+  local command_items = {
+    { label = 'docker container ls', value = 'docker container ls' },
+    { label = 'docker container ls -a', value = 'docker container ls -a' },
+    { label = 'docker images', value = 'docker images' },
+  }
+
+  local list_opts = {
+    prompt = 'Selecione um comando do Docker: ',
+    height = 10,
+    width = 50,
+    list = command_items,
+    border = true,
+    numbering = true,
+  }
+
+  list_ui.run(list_opts, function(selected)
+    -- Aqui você pode adicionar a lógica para lidar com o comando selecionado
+    print('Você selecionou o comando: ' .. selected)
+    M.run_command(selected)
+  end)
+end
+
+M.run_command = function(command)
+  local handler = function(buffer)
+    vim.fn.termopen(command)
+  end
+  handler(0)
 end
 
 M.run = function(bufnr)
