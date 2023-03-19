@@ -1,6 +1,6 @@
 # runner.nvim
 
-A Neovim plugin to run code inside the editor 
+A customizable Neovim plugin to run code inside the editor 
 
 ## Demo
 ![](./demo/demo.gif) 
