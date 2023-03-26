@@ -33,7 +33,7 @@ A customizable Neovim plugin to run code inside the editor
   Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
   ```lua
-  require("lazy").setup({
+  require('lazy').setup({
     {
       'MarcHamamji/runner.nvim',
       dependencies = {
