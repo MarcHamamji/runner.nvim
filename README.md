@@ -60,8 +60,7 @@ A customizable Neovim plugin to run code inside the editor
   ```
 
 ## Configuration
-
-  ### `setup(options)`
+  #### `setup(options)`
   Runner comes with the following defaults:
   ```lua
     require('runner').setup({
