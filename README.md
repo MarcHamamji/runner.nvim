@@ -44,7 +44,7 @@ A customizable Neovim plugin to run code inside the editor
         dependencies = { 'nvim-lua/plenary.nvim' }
       }, 
       config = function()
-        require(runner').setup()
+        require('runner').setup()
       end
     }
   })
