@@ -23,13 +23,13 @@ M.create_window = function()
     return M._window
   end
 
-  if (config.options.position == "right") then
+  if (config.options.position == 'right') then
     vim.cmd('botright ' .. config.options.width .. ' vsplit')
-  elseif (config.options.position == "left") then
+  elseif (config.options.position == 'left') then
     vim.cmd('topleft ' .. config.options.width .. ' vsplit')
-  elseif (config.options.position == "bottom") then
+  elseif (config.options.position == 'bottom') then
     vim.cmd('botright ' .. config.options.height .. 'split')
-  elseif (config.options.position == "top") then
+  elseif (config.options.position == 'top') then
     vim.cmd('topleft ' .. config.options.height .. 'split')
   end
 
