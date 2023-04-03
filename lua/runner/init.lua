@@ -1,8 +1,13 @@
 local handlers = require('runner.handlers')
+local config = require('runner.config')
 
 local M = {}
 
 M._handlers = handlers
+
+M.setup = function(options)
+  config.setup(options)
+end
 
 M.set_handler = function(filetype, handler)
   M._handlers[filetype] = handler
