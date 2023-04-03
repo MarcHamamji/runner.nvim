@@ -21,7 +21,7 @@ M.create_window = function()
     return M._window
   end
 
-  vim.cmd [[ vsplit ]]
+  vim.cmd([[ vsplit ]])
   local window = vim.api.nvim_get_current_win()
 
   local window_opts = {
@@ -30,8 +30,8 @@ M.create_window = function()
     wrap = true,
     spell = false,
     foldenable = false,
-    signcolumn = "no",
-    colorcolumn = "",
+    signcolumn = 'no',
+    colorcolumn = '',
     cursorline = true,
   }
 
@@ -55,11 +55,9 @@ M.run_command = function(command, callback)
     on_stdout = add_line,
     on_exit = function()
       callback(output)
-    end
+    end,
   })
-
 end
-
 
 local is_win = function()
   return package.config:sub(1, 1) == '\\'

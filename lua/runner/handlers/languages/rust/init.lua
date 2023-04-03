@@ -1,5 +1,5 @@
 local helpers = require('runner.handlers.helpers')
-local utils   = require('runner.handlers.utils')
+local utils = require('runner.handlers.utils')
 
 return function(buffer)
   utils.run_command(utils.script_path() .. 'get-bins.sh', function(output)
