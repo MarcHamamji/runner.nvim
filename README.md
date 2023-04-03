@@ -71,9 +71,9 @@ A customizable Neovim plugin to run code inside the editor
     })
   ```
 
+  #### `set_handler(filetype, handler)`
   Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
-  #### `set_handler(filetype, handler)`
   | Argument name | Description | Type |
   |---------------- | --------------- | --------------- |
   | `filetype` | The filetype on which to run the given handler | `string` |
