@@ -60,17 +60,20 @@ A customizable Neovim plugin to run code inside the editor
   ```
 
 ## Configuration
+
   #### `setup(options)`
+  
   Runner comes with the following defaults:
   ```lua
-    require('runner').setup({
-      position = 'right', -- position of task window can be: top, left, right, bottom
-      width = 80,         -- width of window when position is left or right
-      height = 10,        -- height of window when position is top or bottom
-    })
+  require('runner').setup({
+    position = 'right', -- position of task window can be: top, left, right, bottom
+    width = 80,         -- width of window when position is left or right
+    height = 10,        -- height of window when position is top or bottom
+  })
   ```
 
   #### `set_handler(filetype, handler)`
+  
   Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
   | Argument name | Description | Type |
