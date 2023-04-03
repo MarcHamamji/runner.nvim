@@ -1,5 +1,7 @@
 local M = {}
 
+local config = require('runner.config')
+
 M._buffer = nil
 M._window = nil
 
@@ -21,7 +23,16 @@ M.create_window = function()
     return M._window
   end
 
-  vim.cmd [[ vsplit ]]
+  if (config.options.position == "right") then
+    vim.cmd('botright ' .. config.options.width .. ' vsplit')
+  elseif (config.options.position == "left") then
+    vim.cmd('topleft ' .. config.options.width .. ' vsplit')
+  elseif (config.options.position == "bottom") then
+    vim.cmd('botright ' .. config.options.height .. 'split')
+  elseif (config.options.position == "top") then
+    vim.cmd('topleft ' .. config.options.height .. 'split')
+  end
+
   local window = vim.api.nvim_get_current_win()
 
   local window_opts = {
@@ -57,7 +68,6 @@ M.run_command = function(command, callback)
       callback(output)
     end
   })
-
 end
 
 

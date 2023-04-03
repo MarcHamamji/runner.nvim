@@ -39,7 +39,14 @@ A customizable Neovim plugin to run code inside the editor
       dependencies = {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
-      }
+      }, 
+      config = function()
+        require("runner").setup({
+          position = "right", -- position of task window can be: top, left, right, bottom
+          width = 80,         -- width of window when position is left or right
+          height = 10,        -- height of window when position is top or bottom
+        })
+      end
     }
   })
   ```
@@ -55,7 +62,15 @@ A customizable Neovim plugin to run code inside the editor
 
 ## Configuration
 
-  This plugin doesn't have a `setup()` method, but you can set your filetype handlers using the `set_handler()` method.
+  ### S`setup(options)`
+  Runner comes with the following defaults:
+  ```lua
+  {
+    position = "right", -- position of task window can be: top, left, right, bottom
+    width = 80,         -- width of window when position is left or right
+    height = 10,        -- height of window when position is top or bottom
+  }
+  ```
 
   Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
