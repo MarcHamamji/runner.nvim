@@ -18,56 +18,56 @@ M.create_buffer = function()
 end
 
 M.create_window = function()
-	if M._window and vim.api.nvim_win_is_valid(M._window) then
-		vim.api.nvim_set_current_win(M._window)
-		return M._window
-	end
+  if M._window and vim.api.nvim_win_is_valid(M._window) then
+    vim.api.nvim_set_current_win(M._window)
+    return M._window
+  end
 
-	if config.options.position == "right" then
-		vim.cmd("botright " .. config.options.width .. " vsplit")
-	elseif config.options.position == "left" then
-		vim.cmd("topleft " .. config.options.width .. " vsplit")
-	elseif config.options.position == "bottom" then
-		vim.cmd("botright " .. config.options.height .. "split")
-	elseif config.options.position == "top" then
-		vim.cmd("topleft " .. config.options.height .. "split")
-	end
+  if config.options.position == 'right' then
+    vim.cmd('botright ' .. config.options.width .. ' vsplit')
+  elseif config.options.position == 'left' then
+    vim.cmd('topleft ' .. config.options.width .. ' vsplit')
+  elseif config.options.position == 'bottom' then
+    vim.cmd('botright ' .. config.options.height .. 'split')
+  elseif config.options.position == 'top' then
+    vim.cmd('topleft ' .. config.options.height .. 'split')
+  end
 
-	local window = vim.api.nvim_get_current_win()
+  local window = vim.api.nvim_get_current_win()
 
-	local window_opts = {
-		number = false,
-		relativenumber = false,
-		wrap = true,
-		spell = false,
-		foldenable = false,
-		signcolumn = "no",
-		colorcolumn = "",
-		cursorline = true,
-	}
+  local window_opts = {
+    number = false,
+    relativenumber = false,
+    wrap = true,
+    spell = false,
+    foldenable = false,
+    signcolumn = 'no',
+    colorcolumn = '',
+    cursorline = true,
+  }
 
-	for key, value in pairs(window_opts) do
-		vim.api.nvim_win_set_option(window, key, value)
-	end
+  for key, value in pairs(window_opts) do
+    vim.api.nvim_win_set_option(window, key, value)
+  end
 
-	M._window = window
-	return window
+  M._window = window
+  return window
 end
 
 M.run_command = function(command, callback)
-	local output = {}
+  local output = {}
 
-	local add_line = function(_, data)
-		output[#output + 1] = data
-	end
+  local add_line = function(_, data)
+    output[#output + 1] = data
+  end
 
-	vim.fn.jobstart(command, {
-		cwd = vim.fn.getcwd(),
-		on_stdout = add_line,
-		on_exit = function()
-			callback(output)
-		end,
-	})
+  vim.fn.jobstart(command, {
+    cwd = vim.fn.getcwd(),
+    on_stdout = add_line,
+    on_exit = function()
+      callback(output)
+    end,
+  })
 end
 
 local is_win = function()
