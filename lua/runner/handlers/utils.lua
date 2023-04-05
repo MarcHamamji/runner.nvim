@@ -1,20 +1,20 @@
 local M = {}
 
-local config = require("runner.config")
+local config = require('runner.config')
 
 M._buffer = nil
 M._window = nil
 
 M.create_buffer = function()
-	if M._buffer then
-		vim.api.nvim_buf_delete(M._buffer, {})
-	end
+  if M._buffer then
+    vim.api.nvim_buf_delete(M._buffer, {})
+  end
 
-	local buffer = vim.api.nvim_create_buf(true, true)
-	vim.api.nvim_buf_set_option(buffer, "modifiable", false)
+  local buffer = vim.api.nvim_create_buf(true, true)
+  vim.api.nvim_buf_set_option(buffer, 'modifiable', false)
 
-	M._buffer = buffer
-	return buffer
+  M._buffer = buffer
+  return buffer
 end
 
 M.create_window = function()
@@ -71,22 +71,22 @@ M.run_command = function(command, callback)
 end
 
 local is_win = function()
-	return package.config:sub(1, 1) == "\\"
+  return package.config:sub(1, 1) == '\\'
 end
 
 local get_path_separator = function()
-	if package.config:sub(1, 1) == "\\" then
-		return "\\"
-	end
-	return "/"
+  if package.config:sub(1, 1) == '\\' then
+    return '\\'
+  end
+  return '/'
 end
 
 M.script_path = function()
-	local str = debug.getinfo(2, "S").source:sub(2)
-	if is_win() then
-		str = str:gsub("/", "\\")
-	end
-	return str:match("(.*" .. get_path_separator() .. ")")
+  local str = debug.getinfo(2, 'S').source:sub(2)
+  if is_win() then
+    str = str:gsub('/', '\\')
+  end
+  return str:match('(.*' .. get_path_separator() .. ')')
 end
 
 return M

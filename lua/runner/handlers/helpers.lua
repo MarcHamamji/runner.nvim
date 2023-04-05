@@ -1,27 +1,27 @@
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-local sorters = require("telescope.sorters")
-local themes = require("telescope.themes")
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
+local sorters = require('telescope.sorters')
+local themes = require('telescope.themes')
 
-local utils = require("runner.handlers.utils")
+local utils = require('runner.handlers.utils')
 
 local M = {}
 
 M.shell_handler = function(command, editable)
-	if editable == nil then
-		editable = false
-	end
-	return function(_)
-		if editable then
-			command = vim.fn.input("Command: ", command)
-		end
+  if editable == nil then
+    editable = false
+  end
+  return function(_)
+    if editable then
+      command = vim.fn.input('Command: ', command)
+    end
 
-		local output_buffer = utils.create_buffer()
+    local output_buffer = utils.create_buffer()
 
-		local output_window = utils.create_window()
-		vim.api.nvim_win_set_buf(output_window, output_buffer)
+    local output_window = utils.create_window()
+    vim.api.nvim_win_set_buf(output_window, output_buffer)
 
     vim.fn.termopen(command, {
       cwd = vim.fn.getcwd(),
@@ -30,20 +30,20 @@ M.shell_handler = function(command, editable)
 end
 
 M.command_handler = function(command)
-	return function()
-		vim.cmd(command)
-	end
+  return function()
+    vim.cmd(command)
+  end
 end
 
 -- handlers = { 'Run Tests' = test_handler, 'Run Code' = code_handler }
 M.choice = function(handlers)
-	local handlers_count = vim.tbl_count(handlers)
-	if handlers_count == 0 then
-		print("No handler available right now")
-		return function() end
-	elseif handlers_count == 1 then
-		return vim.tbl_values(handlers)[1]
-	end
+  local handlers_count = vim.tbl_count(handlers)
+  if handlers_count == 0 then
+    print('No handler available right now')
+    return function() end
+  elseif handlers_count == 1 then
+    return vim.tbl_values(handlers)[1]
+  end
 
   return function(buffer)
     local picker = pickers.new(

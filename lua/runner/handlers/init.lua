@@ -1,4 +1,4 @@
-local helpers = require("runner.handlers.helpers")
+local helpers = require('runner.handlers.helpers')
 
 local handlers = {
   rust = require('runner.handlers.languages.rust'),
