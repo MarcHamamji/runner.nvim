@@ -23,13 +23,13 @@ M.create_window = function()
     return M._window
   end
 
-  if (config.options.position == 'right') then
+  if config.options.position == 'right' then
     vim.cmd('botright ' .. config.options.width .. ' vsplit')
-  elseif (config.options.position == 'left') then
+  elseif config.options.position == 'left' then
     vim.cmd('topleft ' .. config.options.width .. ' vsplit')
-  elseif (config.options.position == 'bottom') then
+  elseif config.options.position == 'bottom' then
     vim.cmd('botright ' .. config.options.height .. 'split')
-  elseif (config.options.position == 'top') then
+  elseif config.options.position == 'top' then
     vim.cmd('topleft ' .. config.options.height .. 'split')
   end
 
@@ -41,8 +41,8 @@ M.create_window = function()
     wrap = true,
     spell = false,
     foldenable = false,
-    signcolumn = "no",
-    colorcolumn = "",
+    signcolumn = 'no',
+    colorcolumn = '',
     cursorline = true,
   }
 
@@ -66,10 +66,9 @@ M.run_command = function(command, callback)
     on_stdout = add_line,
     on_exit = function()
       callback(output)
-    end
+    end,
   })
 end
-
 
 local is_win = function()
   return package.config:sub(1, 1) == '\\'

@@ -1,5 +1,5 @@
 local helpers = require('runner.handlers.helpers')
-local utils   = require('runner.handlers.utils')
+local utils = require('runner.handlers.utils')
 
 return function(buffer)
   utils.run_command(utils.script_path() .. 'get-scripts.sh', function(output)
@@ -14,7 +14,7 @@ return function(buffer)
     end
 
     local handlers = {
-      ['Run current file'] = helpers.shell_handler('node ' .. vim.fn.expand('%'))
+      ['Run current file'] = helpers.shell_handler('node ' .. vim.fn.expand('%')),
     }
 
     for _, bin in pairs(bins) do

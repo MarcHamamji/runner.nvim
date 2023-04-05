@@ -24,7 +24,7 @@ M.shell_handler = function(command, editable)
     vim.api.nvim_win_set_buf(output_window, output_buffer)
 
     vim.fn.termopen(command, {
-      cwd = vim.fn.getcwd()
+      cwd = vim.fn.getcwd(),
     })
   end
 end
@@ -46,21 +46,24 @@ M.choice = function(handlers)
   end
 
   return function(buffer)
-    local picker = pickers.new({}, themes.get_dropdown({
-      prompt_title = "Runner",
-      finder = finders.new_table {
-        results = vim.tbl_keys(handlers)
-      },
-      sorter = sorters.get_generic_fuzzy_sorter(),
-      attach_mappings = function(prompt_bufnr)
-        actions.select_default:replace(function()
-          actions.close(prompt_bufnr)
-          local handler_name = action_state.get_selected_entry()[1]
-          handlers[handler_name](buffer)
-        end)
-        return true
-      end,
-    }))
+    local picker = pickers.new(
+      {},
+      themes.get_dropdown {
+        prompt_title = 'Runner',
+        finder = finders.new_table {
+          results = vim.tbl_keys(handlers),
+        },
+        sorter = sorters.get_generic_fuzzy_sorter(),
+        attach_mappings = function(prompt_bufnr)
+          actions.select_default:replace(function()
+            actions.close(prompt_bufnr)
+            local handler_name = action_state.get_selected_entry()[1]
+            handlers[handler_name](buffer)
+          end)
+          return true
+        end,
+      }
+    )
     picker:find()
   end
 end

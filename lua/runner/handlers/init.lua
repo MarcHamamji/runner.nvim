@@ -6,7 +6,7 @@ local handlers = {
   lua = helpers.command_handler('luafile %'),
   javascript = require('runner.handlers.languages.nodejs'),
   typescript = require('runner.handlers.languages.nodejs'),
-  vue = require('runner.handlers.languages.nodejs')
+  vue = require('runner.handlers.languages.nodejs'),
 }
 
 return handlers

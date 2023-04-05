@@ -20,12 +20,12 @@ M.run = function(bufnr)
   else
     buffer = bufnr
   end
-  local filetype = vim.filetype.match({ buf = buffer })
+  local filetype = vim.filetype.match { buf = buffer }
 
   local handler = M._handlers[filetype]
 
   if not handler then
-    print(string.format('No handler defined for filetype \'%s\'', filetype))
+    print(string.format("No handler defined for filetype '%s'", filetype))
     return
   end
 
