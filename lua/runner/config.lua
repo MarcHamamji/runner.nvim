@@ -2,8 +2,8 @@ local M = {}
 
 local defaults = {
   position = 'right', -- options: top, left, right, bottom
-  width = 80,         -- width of window when position is left or right
-  height = 10,        -- height of window when position is top or bottom
+  width = 80, -- width of window when position is left or right
+  height = 10, -- height of window when position is top or bottom
 }
 
 M.options = {}
@@ -14,4 +14,4 @@ end
 
 M.setup()
 
-return M;
+return M
