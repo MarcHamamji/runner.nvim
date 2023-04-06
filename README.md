@@ -103,7 +103,7 @@ A customizable Neovim plugin to run code inside the editor
 
   - #### `shell_handler(command, editable)`
 
-    Runs a command in a shell by opening it in a new vertical split window, with a terminal buffer.
+    Runs a command in a shell by opening it in a new split window, with a terminal buffer.
     
     | Argument name | Description | Type |
     |---------------- | --------------- | --------------- |
