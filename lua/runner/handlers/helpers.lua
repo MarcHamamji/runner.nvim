@@ -63,23 +63,23 @@ M.choice = function(handlers)
           end)
           actions.select_horizontal:replace(function()
             local default_position = config.options.position
-            config.options.position = 'bottom';
+            config.options.position = 'bottom'
 
             actions.close(prompt_bufnr)
             local handler_name = action_state.get_selected_entry()[1]
             handlers[handler_name](buffer)
 
-            config.options.position = default_position;
+            config.options.position = default_position
           end)
           actions.select_vertical:replace(function()
             local default_position = config.options.position
-            config.options.position = 'top';
+            config.options.position = 'top'
 
             actions.close(prompt_bufnr)
             local handler_name = action_state.get_selected_entry()[1]
             handlers[handler_name](buffer)
 
-            config.options.position = default_position;
+            config.options.position = default_position
           end)
           return true
         end,
