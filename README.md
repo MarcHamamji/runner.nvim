@@ -107,9 +107,10 @@ A customizable Neovim plugin to run code inside the editor
 
     Runs a command in a shell by opening it in a new split window, with a terminal buffer.
 
-
     The split window's position will be determined by the `position` value from the config. It will be overwritten when using the telescope mapping to open horizontally or vertically.
-
+    - `select_horizontal` (defaults to `<C-X>`): Opens the window at the bottom of the screen.
+    - `select_vertical` (defaults to `<C-V>`): Opens the window at the right of the screen.
+    <br/>
 
     | Argument name | Description | Type |
     |---------------- | --------------- | --------------- |
