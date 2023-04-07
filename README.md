@@ -66,7 +66,9 @@ A customizable Neovim plugin to run code inside the editor
   Runner comes with the following defaults:
   ```lua
   require('runner').setup({
-    position = 'right', -- position of the terminal window when using the shell_handler - can be: top, left, right, bottom
+    position = 'right', -- position of the terminal window when using the shell_handler
+                        -- can be: top, left, right, bottom
+                        -- will be overwritten when using the telescope mapping to open horizontally or vertically
     width = 80,         -- width of window when position is left or right
     height = 10,        -- height of window when position is top or bottom
   })
@@ -104,7 +106,11 @@ A customizable Neovim plugin to run code inside the editor
   - #### `shell_handler(command, editable)`
 
     Runs a command in a shell by opening it in a new split window, with a terminal buffer.
-    
+
+
+    The split window's position will be determined by the `position` value from the config. It will be overwritten when using the telescope mapping to open horizontally or vertically.
+
+
     | Argument name | Description | Type |
     |---------------- | --------------- | --------------- |
     | `command` | The shell command to run when the handler is called | `string` |
