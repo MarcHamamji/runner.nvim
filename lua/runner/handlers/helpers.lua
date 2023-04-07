@@ -5,6 +5,7 @@ local action_state = require('telescope.actions.state')
 local sorters = require('telescope.sorters')
 local themes = require('telescope.themes')
 
+local config = require('runner.config')
 local utils = require('runner.handlers.utils')
 
 local M = {}
@@ -59,6 +60,26 @@ M.choice = function(handlers)
             actions.close(prompt_bufnr)
             local handler_name = action_state.get_selected_entry()[1]
             handlers[handler_name](buffer)
+          end)
+          actions.select_horizontal:replace(function()
+            local default_position = config.options.position
+            config.options.position = 'bottom'
+
+            actions.close(prompt_bufnr)
+            local handler_name = action_state.get_selected_entry()[1]
+            handlers[handler_name](buffer)
+
+            config.options.position = default_position
+          end)
+          actions.select_vertical:replace(function()
+            local default_position = config.options.position
+            config.options.position = 'top'
+
+            actions.close(prompt_bufnr)
+            local handler_name = action_state.get_selected_entry()[1]
+            handlers[handler_name](buffer)
+
+            config.options.position = default_position
           end)
           return true
         end,
