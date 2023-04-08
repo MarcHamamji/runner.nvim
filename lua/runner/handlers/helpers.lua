@@ -24,6 +24,8 @@ M.shell_handler = function(command, editable)
     local output_window = utils.create_window()
     vim.api.nvim_win_set_buf(output_window, output_buffer)
 
+    utils._last_command = command
+
     vim.fn.termopen(command, {
       cwd = vim.fn.getcwd(),
     })

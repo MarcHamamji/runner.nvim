@@ -2,25 +2,26 @@ local M = {}
 
 local config = require('runner.config')
 
-M._buffer = nil
-M._window = nil
+M._terminal_buffer = nil
+M._terminal_window = nil
+M._last_command = nil
 
 M.create_buffer = function()
-  if M._buffer then
-    vim.api.nvim_buf_delete(M._buffer, {})
+  if M._terminal_buffer then
+    vim.api.nvim_buf_delete(M._terminal_buffer, {})
   end
 
   local buffer = vim.api.nvim_create_buf(true, true)
   vim.api.nvim_buf_set_option(buffer, 'modifiable', false)
 
-  M._buffer = buffer
+  M._terminal_buffer = buffer
   return buffer
 end
 
 M.create_window = function()
-  if M._window and vim.api.nvim_win_is_valid(M._window) then
-    vim.api.nvim_set_current_win(M._window)
-    return M._window
+  if M._terminal_window and vim.api.nvim_win_is_valid(M._terminal_window) then
+    vim.api.nvim_set_current_win(M._terminal_window)
+    return M._terminal_window
   end
 
   if config.options.position == 'right' then
@@ -50,7 +51,7 @@ M.create_window = function()
     vim.api.nvim_win_set_option(window, key, value)
   end
 
-  M._window = window
+  M._terminal_window = window
   return window
 end
 
