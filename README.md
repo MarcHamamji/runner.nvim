@@ -53,7 +53,7 @@ A customizable Neovim plugin to run code inside the editor
 ## Usage
 
   ```lua
-  require('runner').run()
+  require('runner').run() -- Can also be called with the buffer number where the code is
 
   -- To set a mapping
   vim.keymap.set('n', '<leader><space>', require('runner').run)
