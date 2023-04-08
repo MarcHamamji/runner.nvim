@@ -19,6 +19,7 @@ M.create_buffer = function()
 end
 
 M.create_window = function()
+  -- Don't know why vim.api.nvim_win_is_valid(M._terminal_window) is always false...
   if M._terminal_window and vim.api.nvim_win_is_valid(M._terminal_window) then
     vim.api.nvim_set_current_win(M._terminal_window)
     return M._terminal_window
