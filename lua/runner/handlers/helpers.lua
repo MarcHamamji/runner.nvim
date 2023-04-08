@@ -24,6 +24,8 @@ M.shell_handler = function(command, editable)
     local output_window = utils.create_window()
     vim.api.nvim_win_set_buf(output_window, output_buffer)
 
+    utils._last_command = command
+
     vim.fn.termopen(command, {
       cwd = vim.fn.getcwd(),
     })
@@ -73,7 +75,7 @@ M.choice = function(handlers)
           end)
           actions.select_vertical:replace(function()
             local default_position = config.options.position
-            config.options.position = 'top'
+            config.options.position = 'right'
 
             actions.close(prompt_bufnr)
             local handler_name = action_state.get_selected_entry()[1]

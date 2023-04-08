@@ -1,5 +1,7 @@
 local handlers = require('runner.handlers')
+local utils = require('runner.handlers.utils')
 local config = require('runner.config')
+local helpers = require('runner.handlers.helpers')
 
 local M = {}
 
@@ -20,6 +22,12 @@ M.run = function(bufnr)
   else
     buffer = bufnr
   end
+
+  if buffer == utils._terminal_buffer then
+    helpers.shell_handler(utils._last_command, false)()
+    return
+  end
+
   local filetype = vim.filetype.match { buf = buffer }
 
   local handler = M._handlers[filetype]
