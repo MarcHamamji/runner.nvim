@@ -75,7 +75,7 @@ M.choice = function(handlers)
           end)
           actions.select_vertical:replace(function()
             local default_position = config.options.position
-            config.options.position = 'top'
+            config.options.position = 'right'
 
             actions.close(prompt_bufnr)
             local handler_name = action_state.get_selected_entry()[1]
