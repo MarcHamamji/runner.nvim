@@ -16,7 +16,10 @@ M.shell_handler = function(command, editable)
   end
   return function(_)
     if editable then
-      command = vim.fn.input('Command: ', command)
+      command = vim.fn.input {
+        prompt = 'Command: ',
+        default = command,
+      }
     end
 
     local output_buffer = utils.create_buffer()
