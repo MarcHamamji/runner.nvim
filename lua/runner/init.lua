@@ -11,6 +11,19 @@ M.setup = function(options)
   config.setup(options)
 end
 
+--- **Overrides** the handler for the specified filetype
+---
+--- Usage:
+--- ```lua
+--- local helpers = require('runner.handlers.helpers')
+--- require('runner').set_handler(
+---   'lua',
+---   helpers.command_handler('luafile %'),
+--- )
+--- ```
+---
+--- @param filetype string The filetype on which to run the given handler
+--- @param handler function The handler to run when the current file matches the filetype
 M.set_handler = function(filetype, handler)
   M._handlers[filetype] = handler
 end
