@@ -33,8 +33,6 @@ return function(buffer)
       handlers['Custom'] = helpers.shell_handler('cargo ', true)
       handlers['Test all'] = helpers.shell_handler('cargo test')
 
-      P(handlers)
-
       for _, bin in pairs(tests) do
         handlers['Test "' .. bin .. '"'] = helpers.shell_handler('cargo test --test ' .. bin)
       end
