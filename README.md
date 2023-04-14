@@ -10,6 +10,7 @@ A customizable Neovim plugin to run code inside the editor
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
+- [Handlers](#handlers)
 - [Helpers](#helpers)
 - [Advanced handlers configurations](#advanced-handlers-configurations)
 - [Contribution](#contribution)
@@ -53,7 +54,10 @@ A customizable Neovim plugin to run code inside the editor
 ## Usage
 
   ```lua
-  require('runner').run() -- Can also be called with the buffer number where the code is
+  require('runner').run()
+
+  -- Can also be called with the buffer number where the code is:
+  -- require('runner').run( <buffer_number> )
 
   -- To set a mapping
   vim.keymap.set('n', '<leader><space>', require('runner').run)
@@ -62,8 +66,9 @@ A customizable Neovim plugin to run code inside the editor
 ## Configuration
 
   #### `setup(options)`
-  
-  Runner comes with the following defaults:
+
+  Using this setup function is **optional**. Runner comes with the following defaults:
+
   ```lua
   require('runner').setup({
     position = 'right', -- position of the terminal window when using the shell_handler
@@ -74,9 +79,23 @@ A customizable Neovim plugin to run code inside the editor
   })
   ```
 
-  #### `set_handler(filetype, handler)`
+## Handlers
+
+  Runner has the concept of handlers. Handlers are language specific and are little
+  functions that run code. For example, a handler could run the project, run the tests,
+  build the project, or even run custom project scripts.
+
+  A handler is a function that accepts a buffer number as an argument, and doesn't return
+  anything. The buffer number defaults to the buffer where the `run()` function was called,
+  or, if specified, the buffer number that was passed to the `run()` function. This buffer
+  number where the code to run is located. Runner runs the appropriate handler based on this
+  buffer's filetype.
+
+  For using multiple handlers on the same filetype, see the [choice helper](#choice(handlers)) 
   
-  Default handlers can be found [here](./lua/runner/handlers/init.lua).
+  #### `set_handler(filetype, handler)`
+
+  This function **overwrites** the handler set for the specified filetype. Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
   | Argument name | Description | Type |
   |---------------- | --------------- | --------------- |
@@ -110,6 +129,7 @@ A customizable Neovim plugin to run code inside the editor
     The split window's position will be determined by the `position` value from the config. It will be overwritten when using the telescope mapping to open horizontally or vertically.
     - `select_horizontal` (defaults to `<C-X>`): Opens the window at the bottom of the screen.
     - `select_vertical` (defaults to `<C-V>`): Opens the window at the right of the screen.
+    <br/>
     <br/>
 
     | Argument name | Description | Type |
