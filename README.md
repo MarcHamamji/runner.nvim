@@ -91,7 +91,7 @@ A customizable Neovim plugin to run code inside the editor
   number where the code to run is located. Runner runs the appropriate handler based on this
   buffer's filetype.
 
-  For using multiple handlers on the same filetype, see the [choice helper](#choice(handlers)) 
+  For using multiple handlers on the same filetype, see the [choice helper](#choice(handlers)).
   
   #### `set_handler(filetype, handler)`
 
