@@ -85,11 +85,11 @@ A customizable Neovim plugin to run code inside the editor
   functions that run code. For example, a handler could run the project, run the tests,
   build the project, or even run custom project scripts.
 
-  A handler is a function that accepts a buffer number as an argument, and doesn't return
-  anything. The buffer number defaults to the buffer where the `run()` function was called,
-  or, if specified, the buffer number that was passed to the `run()` function. This buffer
-  number where the code to run is located. Runner runs the appropriate handler based on this
-  buffer's filetype.
+  A handler is a function that accepts a buffer number as an argument, and doesn't
+  return anything. This buffer number is the buffer where the code to run is located.
+  It defaults to the buffer where the `run()` function was called, or, if specified,
+  is the buffer number that was passed to the `run()` function. Runner runs the
+  appropriate handler based on this buffer's filetype.
 
   For using multiple handlers on the same filetype, see the [choice helper](#choice(handlers)).
   
