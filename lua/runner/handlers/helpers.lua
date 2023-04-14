@@ -10,6 +10,19 @@ local utils = require('runner.handlers.utils')
 
 local M = {}
 
+--- Runs a command in a shell by opening it in a new split window, with a terminal buffer.
+---
+--- Usage:
+--- ```lua
+--- local helpers = require('runner.handlers.helpers')
+--- require('runner').set_handler(
+---   'rust',
+---   helpers.shell_handler('cargo run', true),
+--- )
+--- ```
+---
+--- @param command string The shell command to run when the handler called
+--- @param editable boolean  Whether the user should be prompted to edit the command using `vim.input()` before running it. Useful when giving command line arguments to a script
 M.shell_handler = function(command, editable)
   if editable == nil then
     editable = false
@@ -35,13 +48,42 @@ M.shell_handler = function(command, editable)
   end
 end
 
+--- Runs a vim command
+---
+--- Usage:
+--- ```lua
+--- local helpers = require('runner.handlers.helpers')
+--- require('runner').set_handler(
+---   'lua',
+---   helpers.command_handler('luafile %'),
+--- )
+--- ```
+---
+--- @param command string The vim command to run when the handler called
 M.command_handler = function(command)
   return function()
     vim.cmd(command)
   end
 end
 
--- handlers = { 'Run Tests' = test_handler, 'Run Code' = code_handler }
+--- Opens a `Telescope` finder to allow the user to choose which handler to run
+---
+--- Usage:
+--- ```lua
+--- local helpers = require('runner.handlers.helpers')
+--- require('runner').set_handler(
+---   'lua',
+---   helpers.choice({
+---     ['Run current file'] = helpers.command_handler('luafile %'),
+---     ['Foo'] = helpers.shell_handler('foo'),
+---     ['Bar'] = function(buffer)
+---       -- Custom handler here...
+---     end,
+---   }),
+--- )
+--- ```
+---
+--- @param handlers table<string, function> The vim command to run when the handler called
 M.choice = function(handlers)
   local handlers_count = vim.tbl_count(handlers)
   if handlers_count == 0 then
