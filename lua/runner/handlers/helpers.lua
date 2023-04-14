@@ -22,7 +22,7 @@ local M = {}
 --- ```
 ---
 --- @param command string The shell command to run when the handler called
---- @param editable boolean  Whether the user should be prompted to edit the command using `vim.input()` before running it. Useful when giving command line arguments to a script
+--- @param editable boolean? Whether the user should be prompted to edit the command using `vim.input()` before running it. Useful when giving command line arguments to a script. *Defaults to false*
 M.shell_handler = function(command, editable)
   if editable == nil then
     editable = false

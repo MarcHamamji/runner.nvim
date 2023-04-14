@@ -7,7 +7,7 @@ return function(buffer)
 
     for _, line in pairs(output) do
       for _, data in pairs(line) do
-        if vim.trim(data) ~= '' then
+        if vim.trim(data) ~= '' and not string.match(data, 'npm ERR!') then
           bins[#bins + 1] = data
         end
       end
