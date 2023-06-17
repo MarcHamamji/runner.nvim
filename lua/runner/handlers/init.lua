@@ -7,6 +7,7 @@ local handlers = {
   javascript = require('runner.handlers.languages.nodejs'),
   typescript = require('runner.handlers.languages.nodejs'),
   vue = require('runner.handlers.languages.nodejs'),
+  go = require('runner.handlers.languages.go'),
 }
 
 return handlers
