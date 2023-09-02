@@ -28,29 +28,27 @@ M.set_handler = function(filetype, handler)
   M._handlers[filetype] = handler
 end
 
+--- @param bufnr integer|nil
 M.run = function(bufnr)
-  local buffer
-  if bufnr == nil or bufnr == 0 then
-    buffer = vim.api.nvim_get_current_buf()
-  else
-    buffer = bufnr
-  end
+	if bufnr == nil or bufnr == 0 then
+		bufnr = vim.api.nvim_get_current_buf()
+	end
 
-  if buffer == utils._terminal_buffer then
-    helpers.shell_handler(utils._last_command, false)()
-    return
-  end
+	if bufnr == utils._terminal_buffer then
+		helpers.shell_handler(utils._last_command, false)()
+		return
+	end
 
-  local filetype = vim.filetype.match { buf = buffer }
+	local filetype = vim.filetype.match({ buf = bufnr })
 
   local handler = M._handlers[filetype]
 
-  if not handler then
-    print(string.format("No handler defined for filetype '%s'", filetype))
-    return
-  end
+	if not handler then
+		print("No handler defined for filetype " .. filetype)
+		return
+	end
 
-  handler(buffer)
+	handler(bufnr)
 end
 
 return M
