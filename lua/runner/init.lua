@@ -30,37 +30,37 @@ end
 
 --- @param bufnr integer|nil
 M.run = function(bufnr)
-	if bufnr == nil or bufnr == 0 then
-		bufnr = vim.api.nvim_get_current_buf()
-	end
+  if bufnr == nil or bufnr == 0 then
+    bufnr = vim.api.nvim_get_current_buf()
+  end
 
-	if bufnr == utils._terminal_buffer then
-		helpers.shell_handler(utils._last_command, false)()
-		return
-	end
+  if bufnr == utils._terminal_buffer then
+    helpers.shell_handler(utils._last_command, false)()
+    return
+  end
 
-	local filetype = vim.filetype.match({ buf = bufnr })
+  local filetype = vim.filetype.match { buf = bufnr }
 
   local handler = M._handlers[filetype]
 
-	if not handler then
-		print("No handler defined for filetype " .. filetype)
-		return
-	end
+  if not handler then
+    print('No handler defined for filetype ' .. filetype)
+    return
+  end
 
-	handler(bufnr)
+  handler(bufnr)
 end
 
 --- @param bufnr integer|nil
 M.autorun = function(bufnr)
-	M.run(bufnr)
-	vim.api.nvim_create_autocmd("BufWritePost", {
-		group = vim.api.nvim_create_augroup("AutoRunner", { clear = true }),
-		pattern = "*",
-		callback = function()
-			helpers.shell_handler(utils._last_command, false)()
-		end,
-	})
+  M.run(bufnr)
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = vim.api.nvim_create_augroup('AutoRunner', { clear = true }),
+    pattern = '*',
+    callback = function()
+      helpers.shell_handler(utils._last_command, false)()
+    end,
+  })
 end
 
 return M
