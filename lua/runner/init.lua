@@ -63,4 +63,9 @@ M.autorun = function(bufnr)
   })
 end
 
+M.autorun_stop = function()
+  vim.api.nvim_del_augroup_by_name('AutoRunner')
+  vim.api.nvim_win_close(utils._terminal_window, true)
+end
+
 return M
