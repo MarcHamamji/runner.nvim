@@ -51,4 +51,16 @@ M.run = function(bufnr)
 	handler(bufnr)
 end
 
+--- @param bufnr integer|nil
+M.autorun = function(bufnr)
+	M.run(bufnr)
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		group = vim.api.nvim_create_augroup("AutoRunner", { clear = true }),
+		pattern = "*",
+		callback = function()
+			helpers.shell_handler(utils._last_command, false)()
+		end,
+	})
+end
+
 return M
