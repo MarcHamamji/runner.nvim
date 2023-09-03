@@ -28,7 +28,7 @@ M.set_handler = function(filetype, handler)
   M._handlers[filetype] = handler
 end
 
---- @param bufnr integer|nil
+--- @param bufnr integer?
 M.run = function(bufnr)
   if bufnr == nil or bufnr == 0 then
     bufnr = vim.api.nvim_get_current_buf()
@@ -48,17 +48,22 @@ M.run = function(bufnr)
     return
   end
 
+  utils._last_handler = handler
   handler(bufnr)
 end
 
---- @param bufnr integer|nil
+--- @param bufnr integer?
 M.autorun = function(bufnr)
   M.run(bufnr)
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = vim.api.nvim_create_augroup('AutoRunner', { clear = true }),
     pattern = '*',
     callback = function()
-      helpers.shell_handler(utils._last_command, false)()
+      if utils._terminal_window then
+        helpers.shell_handler(utils._last_command, false)()
+      else
+        utils._last_handler(bufnr)
+      end
     end,
   })
 end

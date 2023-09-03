@@ -5,6 +5,7 @@ local config = require('runner.config')
 M._terminal_buffer = nil
 M._terminal_window = nil
 M._last_command = nil
+M._last_handler = nil
 
 M.create_buffer = function()
   if M._terminal_buffer then
