@@ -1,9 +1,10 @@
 # runner.nvim
 
-A customizable Neovim plugin to run code inside the editor 
+A customizable Neovim plugin to run code inside the editor
 
 ## Demo
-![](./demo/demo.gif) 
+
+![](./demo/demo.gif)
 
 ## Table of Contents
 
@@ -53,11 +54,24 @@ A customizable Neovim plugin to run code inside the editor
 
 ## Usage
 
+### Commands
+
+| Command           | lua                                | Description                              |
+|-------------------|------------------------------------|------------------------------------------|
+| `:Runner`         | `require('runner').run()`          | Runs code in buffer                      |
+| `:AutoRunner`     | `require('runner').autorun()`      | Runs code in buffer on every file save   |
+| `:AutoRunnerStop` | `require('runner').autorun_stop()` | Stops `AutoRunner` and closes the window |
+
+### Lua
+
   ```lua
   require('runner').run()
+  require('runner').autorun()
+  require('runner').autorun_stop()
 
   -- Can also be called with the buffer number where the code is:
   -- require('runner').run( <buffer_number> )
+  -- require('runner').autorun( <buffer_number> )
 
   -- To set a mapping
   vim.keymap.set('n', '<leader><space>', require('runner').run)
@@ -65,9 +79,9 @@ A customizable Neovim plugin to run code inside the editor
 
 ## Configuration
 
-  #### `setup(options)`
+#### `setup(options)`
 
-  Using this setup function is **optional**. Runner comes with the following defaults:
+  Runner comes with the following defaults:
 
   ```lua
   require('runner').setup({
@@ -93,7 +107,7 @@ A customizable Neovim plugin to run code inside the editor
 
   For using multiple handlers on the same filetype, see the [choice helper](#choicehandlers).
   
-  #### `set_handler(filetype, handler)`
+#### `set_handler(filetype, handler)`
 
   This function **overwrites** the handler set for the specified filetype. Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
@@ -122,13 +136,13 @@ A customizable Neovim plugin to run code inside the editor
 
   Here is a description of each one:
 
-  - #### `shell_handler(command, editable)`
+- #### `shell_handler(command, editable)`
 
     Runs a command in a shell by opening it in a new split window, with a terminal buffer.
 
     The split window's position will be determined by the `position` value from the config. It will be overwritten when using the telescope mapping to open horizontally or vertically.
-    - `select_horizontal` (defaults to `<C-X>`): Opens the window at the bottom of the screen.
-    - `select_vertical` (defaults to `<C-V>`): Opens the window at the right of the screen.
+  - `select_horizontal` (defaults to `<C-X>`): Opens the window at the bottom of the screen.
+  - `select_vertical` (defaults to `<C-V>`): Opens the window at the right of the screen.
     <br/>
     <br/>
 
@@ -136,7 +150,7 @@ A customizable Neovim plugin to run code inside the editor
     |---------------- | --------------- | --------------- |
     | `command` | The shell command to run when the handler is called | `string` |
     | `editable`| Whether the user should be prompted to edit the command using `vim.input()` before running it. Useful when giving command line arguments to a script | `boolean` *(optional, defaults to false)* |
-    
+
     Example:
 
     ```lua
@@ -144,14 +158,14 @@ A customizable Neovim plugin to run code inside the editor
     require('runner').set_handler('rust', shell_handler('cargo run', true))
     ```
 
-  - #### `command_handler(command)`
-    
+- #### `command_handler(command)`
+
     Runs a command in the Vim command mode.
 
     | Argument name | Description | Type |
     |---------------- | --------------- | --------------- |
     | `command` | The Vim command to run when the handler is called | `string` |
-    
+
     Example:
 
     ```lua
@@ -159,14 +173,14 @@ A customizable Neovim plugin to run code inside the editor
     require('runner').set_handler('lua', command_handler('luafile %'))
     ```
 
-  - #### `choice(handlers)`
-    
+- #### `choice(handlers)`
+
     Opens a `Telescope` finder to allow the user to choose which handler to run.
-    
+
     | Argument name | Description | Type |
     |---------------- | --------------- | --------------- |
     | `handlers` | The list of handlers to choose from | `table` where the keys are the name of the handlers in the `telescope` finder, and where the values are the actual handlers |
-    
+
     Example:
 
     ```lua
@@ -177,6 +191,7 @@ A customizable Neovim plugin to run code inside the editor
       ['Custom'] = helpers.shell_handler('cargo ', true),
     }))
     ```
+
 ## Advanced handlers configurations
   
   For creating dynamic handlers like one for each `npm` or `cargo` script, you can write your own handler function that generates the other handlers, gives them to the choice handler, and runs it itself.
@@ -187,22 +202,26 @@ A customizable Neovim plugin to run code inside the editor
   This project uses [StyLua](https://github.com/JohnnyMorganz/StyLua) for enforcing code style, and has a [pre-commit](https://pre-commit.com/) hook setup for running it automatically. `runner.nvim` also has a Github Action that runs the linter on every Pull request. If a check doesn't pass on a specific Pull request, please lint the code and commit it again.
 
   For running them locally, you have to have them installed on your system:
-  - [StyLua Installation](https://github.com/JohnnyMorganz/StyLua#installation)
-  - [pre-commit Installation](https://pre-commit.com/#install) 
 
-  #### Some useful commands:
+- [StyLua Installation](https://github.com/JohnnyMorganz/StyLua#installation)
+- [pre-commit Installation](https://pre-commit.com/#install)
 
-  - Install the pre-commit hook
+#### Some useful commands
+
+- Install the pre-commit hook
+
     ```bash
     pre-commit install
     ```
 
-  - Check for StyLua errors
+- Check for StyLua errors
+
     ```bash
     stylua --check lua/
     ```
-    
-  - Fix StyLua errors
+
+- Fix StyLua errors
+
     ```bash
     stylua lua/
     ```
