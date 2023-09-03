@@ -56,11 +56,11 @@ A customizable Neovim plugin to run code inside the editor
 
 ### Commands
 
-| Command           | Description                              |
-|-------------------|------------------------------------------|
-| `:Runner`         | Runs code in buffer                      |
-| `:AutoRunner`     | Runs code in buffer on every file save   |
-| `:AutoRunnerStop` | Stops `AutoRunner` and closes the window |
+| Command           | lua                                | Description                              |
+|-------------------|------------------------------------|------------------------------------------|
+| `:Runner`         | `require('runner').run()`          | Runs code in buffer                      |
+| `:AutoRunner`     | `require('runner').autorun()`      | Runs code in buffer on every file save   |
+| `:AutoRunnerStop` | `require('runner').autorun_stop()` | Stops `AutoRunner` and closes the window |
 
 ### Lua
 
