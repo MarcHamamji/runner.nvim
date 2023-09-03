@@ -71,6 +71,7 @@ A customizable Neovim plugin to run code inside the editor
 
   -- Can also be called with the buffer number where the code is:
   -- require('runner').run( <buffer_number> )
+  -- require('runner').autorun( <buffer_number> )
 
   -- To set a mapping
   vim.keymap.set('n', '<leader><space>', require('runner').run)
