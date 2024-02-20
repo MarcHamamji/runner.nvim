@@ -124,8 +124,6 @@ A customizable Neovim plugin to run code inside the editor
   end)
   ```
 
-  **Note:** This method overwrites the default handlers set for the specified filetype.
-
 ## Helpers
   
   This plugin exposes some helpers to make creating handlers easier. They're all available by importing them as follows:
