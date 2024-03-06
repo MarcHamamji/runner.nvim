@@ -8,7 +8,7 @@ M._last_command = nil
 M._last_handler = nil
 
 M.create_buffer = function()
-  if M._terminal_buffer then
+  if M._terminal_buffer and vim.api.nvim_buf_is_valid(M._terminal_buffer) then
     vim.api.nvim_buf_delete(M._terminal_buffer, {})
   end
 
