@@ -88,8 +88,11 @@ A customizable Neovim plugin to run code inside the editor
     position = 'right', -- position of the terminal window when using the shell_handler
                         -- can be: top, left, right, bottom
                         -- will be overwritten when using the telescope mapping to open horizontally or vertically
+
     width = 80,         -- width of window when position is left or right
     height = 10,        -- height of window when position is top or bottom
+
+    handlers = {} -- discussed in the next section
   })
   ```
 
@@ -105,31 +108,59 @@ A customizable Neovim plugin to run code inside the editor
   is the buffer number that was passed to the `run()` function. Runner runs the
   appropriate handler based on this buffer's filetype.
 
-  For using multiple handlers on the same filetype, see the [choice helper](#choicehandlers).
-  
-#### `set_handler(filetype, handler)`
+  Default handlers can be found [here](./lua/runner/handlers/init.lua).
 
-  This function **overwrites** the handler set for the specified filetype. Default handlers can be found [here](./lua/runner/handlers/init.lua).
-
-  | Argument name | Description | Type |
+  When setting a handler, you should pass the following arguments
+  | Argument | Description | Type |
   |---------------- | --------------- | --------------- |
   | `filetype` | The filetype on which to run the given handler | `string` |
-  | `handler` | The handler to run when the current file matches the filetype | `function(code_buffer_number)`  |
+  | `handler` | The handler to run when the current file matches the filetype | `function(bufnr)`  |
+
+  There are 2 ways to set handlers. Both of them **overwrite** the handlers already set for the specified filetype.
+
+- #### `setup(options)`
+
+  You can pass the handlers you want to set to the `setup()` function. The handlers table has the following format:
+
+  ```lua
+  {
+    ["filetype"] = handler
+  }
+  ```
+
+  Example:
+  ```lua
+  require('runner').setup({
+    -- Other options
+
+    handlers = {
+      lua = function(bufnr)
+        vim.print('Running lua file in buffer ' .. bufnr)
+        -- Run the file here
+      end
+    }
+  })
+  ```
+
+- #### `set_handler(filetype, handler)`
 
   Example:
 
   ```lua
-  require('runner').set_handler('lua', function(code_buffer_number)
-    vim.print('Running lua file in buffer ' .. code_buffer_number)
+  require('runner').set_handler('lua', function(bufnr)
+    vim.print('Running lua file in buffer ' .. bufnr)
+    -- Run the file here
   end)
   ```
+
+**NOTE:** For using multiple handlers on the same filetype, see the [choice helper](#choicehandlers).
 
 ## Helpers
   
   This plugin exposes some helpers to make creating handlers easier. They're all available by importing them as follows:
 
   ```lua
-  local handler_name = require('runner.handlers.helpers').handler_name
+  local helper_name = require('runner.handlers.helpers').helper_name
   ```
 
   Here is a description of each one:

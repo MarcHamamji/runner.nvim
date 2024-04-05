@@ -10,6 +10,12 @@ M._handlers = handlers
 M.setup = function(options)
   config.setup(options)
 
+  if type(options.handlers) == "table" then
+    for filetype, handler in pairs(options.handlers) do
+      M.set_handler(filetype, handler)
+    end
+  end
+
   vim.api.nvim_create_user_command('Runner', function()
     require('runner').run()
   end, { desc = 'Run code inside the editor' })
