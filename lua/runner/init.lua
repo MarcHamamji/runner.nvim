@@ -10,7 +10,7 @@ M._handlers = handlers
 M.setup = function(options)
   config.setup(options)
 
-  if type(options.handlers) == "table" then
+  if type(options.handlers) == 'table' then
     for filetype, handler in pairs(options.handlers) do
       M.set_handler(filetype, handler)
     end
