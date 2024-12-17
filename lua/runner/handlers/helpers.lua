@@ -83,7 +83,7 @@ end
 --- )
 --- ```
 ---
---- @param handlers table<string, function> The vim command to run when the handler called
+--- @param handlers table<string, function> The vim command to run when the handler is called
 M.choice = function(handlers)
   local handlers_count = vim.tbl_count(handlers)
   if handlers_count == 0 then
