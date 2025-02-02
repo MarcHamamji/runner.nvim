@@ -228,9 +228,9 @@ A customizable Neovim plugin to run code inside the editor
 
 ## Contribution
 
-  This project uses [StyLua](https://github.com/JohnnyMorganz/StyLua) for enforcing code style, and has a [pre-commit](https://pre-commit.com/) hook setup for running it automatically. `runner.nvim` also has a Github Action that runs the linter on every Pull request. If a check doesn't pass on a specific Pull request, please lint the code and commit it again.
+  This project uses [StyLua](https://github.com/JohnnyMorganz/StyLua) for enforcing code style, and has a [pre-commit](https://pre-commit.com/) hook setup for running it automatically. It also has a Github Action that runs the linter on every pull request. If a check doesn't pass on a specific pull request, please lint the code and commit it again.
 
-  For running them locally, you have to have them installed on your system:
+  For running these tools locally, you have to have them installed on your system:
 
 - [StyLua Installation](https://github.com/JohnnyMorganz/StyLua#installation)
 - [pre-commit Installation](https://pre-commit.com/#install)
